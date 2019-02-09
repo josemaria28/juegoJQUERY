@@ -4,18 +4,21 @@ var puntuacionJ1 = 0;
 var vidaJ1 = 100;
 // Tiempo
 var cAtras = 1000;
+// Numero de malos
+var nMalos=0;
+
 var m1,m2,m3,m4,m5,m6,m7,m8, m9, m10 = null;
 // Manejador //
 $(document).ready(function(){
 	
-	ocultarCapa("#contenedor");
-	//ocultarCapa("#juego1");
+	//ocultarCapa("#contenedor");
+	ocultarCapa("#juego1");
 	ocultarCapa("#gmOver");
 
 	// Ocultar Inicio Juego
-	/*$(document).click(function(){
+	$(document).click(function(){
 		nivel1();
-	});*/
+	});
 	$(document).keydown(function(tecla){
 		if (tecla.keyCode == 13){
 			nivel1();
@@ -26,24 +29,16 @@ $(document).ready(function(){
 	$(document).keydown(function(tecla){
 		if (tecla.keyCode == 40) {// Down
 			$('#actor2').animate({top: "+=15px"},30);
-			//$('#actor1').attr("src","imagenes/animadoZ1.gif");
-			// $('#actor1').width("7%");
-			// ultimoMovimiento = "abajo";
 		}else if(tecla.keyCode == 38) {// Up
 			$('#actor2').animate({top: "-=15px"},30);
-			// $('#actor22').attr("src","imagenes/animadoZ2.gif");
-			// ultimoMovimiento = "arriba";
-			// $('#actor1').width("7%");
 		}else if(tecla.keyCode == 37){// Right
 			$('#actor2').animate({left: "+=-15px"},30);
 			$('#actor22').attr("src","imagenes/animadoZ3.gif");
-			// $('#actor1').width("7%");
 			ultimoMovimiento = "izquerda";
 		}
 		else if(tecla.keyCode == 39){// Left
 			$('#actor2').animate({left: "+=15px"},30);
 			$('#actor22').attr("src","imagenes/animadoZ.gif");
-			// $('#actor1').width("7%");
 			ultimoMovimiento = "derecha";
 		}
 	});
@@ -51,37 +46,24 @@ $(document).ready(function(){
 	$(document).keyup(function(tecla){
 		if (tecla.keyCode == 40) {// Up
 			$('#actor2').animate({top: "+=15px"},30);
-			// $('#actor1').width("7%");
-			// ultimoMovimiento = "arriba";
 		}else if(tecla.keyCode == 38) {// Down
 			$('#actor2').animate({top: "-=15px"},30);
-			// ultimoMovimiento = "abajo";
-			// $('#actor1').width("7%");
 		}else if(tecla.keyCode == 37){// Left
 			$('#actor2').animate({left: "+=-15px"},30);
 			$('#actor22').attr("src","imagenes/animadoZ1.gif");
-			// $('#actor1').width("7%");
 			ultimoMovimiento = "derecha";
 		}
 		else if(tecla.keyCode == 39){// Right
 			$('#actor2').animate({left: "+=15px"},30);
 			$('#actor22').attr("src","imagenes/animadoZ2.gif");
-			// $('#actor1').width("7%");
-			ultimoMovimiento = "izquerda";
+			ultimoMovimiento = "izquierda";
 		}
 	});
 
 	// Disparar
 	$(document).keydown(function(tecla){
 		if(tecla.keyCode == 32){
-			// Posicion #actor2
-			// var elemento = $("#actor2");
-			// var posicion = elemento.position();
-			// alert( "left: " + posicion.left + ", top: " + posicion.top );
-			// ------------------------------------------------------------ //
-			ultimoMovimiento = "derecha";
 			disparo(ultimoMovimiento);
-			
 		}
 	});
 
@@ -111,12 +93,11 @@ function disparo(ultimoMovimiento){
 			break;
 		case "izquierda":// Rigth
 			// Disparar
-			$("#actor1").append('<img id="balaIzq" src="imagenes/balaIzq.gif">');
-			$("#balaDer").css({"left": posicion.left, "top": posicion.top-180});
+			$("#juego1").append('<img id="balaIzq" src="imagenes/balaIzq.gif">');
+			$("#balaIzq").css({"left": posicion.left, "top": posicion.top-180});
 			m6 = setInterval(movimientoBalaI,5);
 			m7 = setInterval(colisionBalaI,5);
 			m8 = setInterval(colisionBalaMaloI,5);
-			//movimientoBalaI();
 			break;
 	}
 }
@@ -124,6 +105,40 @@ function disparo(ultimoMovimiento){
 function movimientoBalaD(){
 	$("#balaDer").animate({left: "-=3px"},1);
 }
+function movimientoBalaI(){
+	$("#balaIzq").animate({left: "+=3px"},1);
+}
+function colisionBalaI(){
+	var bColision = collision($('#balaIzq'),$('#paredD'));
+
+	if( bColision > 0){
+		$('#balaIzq').stop(true);
+		$('#balaIzq').remove();
+		clearInterval(m6);
+		clearInterval(m7);
+	}
+	
+}
+function colisionBalaMaloI(){
+	var bColision = collision($('#balaIzq'),$('#malo1'));
+
+	if( bColision > 0){
+		$('#malo1').stop(true);
+		$('#balaIzq').stop(true);
+		$('#balaIzq').remove();
+		$('#malo1').remove();
+		clearInterval(m1);
+		clearInterval(m2);
+		clearInterval(m6);
+		clearInterval(m7);
+		clearInterval(m8);
+		nMalos++;
+		crearMalos();
+		pasarNivel();
+		puntuacion();
+	}
+}
+
 function colisionBalaD(){
 	var bColision = collision($('#balaDer'),$('#paredI'));
 
@@ -148,7 +163,16 @@ function colisionBalaMalo(){
 		clearInterval(m3);
 		clearInterval(m4);
 		clearInterval(m5);
+		nMalos++;
+		crearMalos();
+		pasarNivel();
+		puntuacion();
 	}
+}
+// Puntuacion 
+function puntuacion(){
+	puntuacionJ1=puntuacionJ1*nMalos+995;
+	alert(puntuacionJ1)
 }
 
 //Tiempo RELOJ
@@ -165,7 +189,6 @@ function cuentAtras(){
 		ocultarCapa("#contenedor");
 		mostrarCapa("#gmOver");
 		$(".pTotalJ1").html(puntuacionJ1);
-		//alert("GAME OVER");
 	}
 	$(".cuentaAtras").html(cAtras);
 }
@@ -175,8 +198,6 @@ setInterval(detectarColisionD,5);
 setInterval(detectarColisionI,5);
 setInterval(detectarColisionA,5);
 setInterval(detectarColisionB,5);
-//setInterval(detectarColisionMaloD,5);
-//setInterval(detectarColisionMaloI,5);
 
 function detectarColisionD(){
 	var bColision = collision($('#actor2'),$('#paredD'));
@@ -238,52 +259,45 @@ function collision(jqDiv1, jqDiv2) {
 function nNivel(nTexto){
 	$(".textNivel").html(nTexto);
 }
-var nMalos=0;
+
 // Niveles
+function pasarNivel(){
+	if (nMalos == 1) {
+		alert("Superaste NIVEL 1");
+		nivel2();
+	}else if (nMalos == 5) {
+		alert("Superaste NIVEL 2");
+		nivel3();
+	}else if (nMalos == 10) {
+		alert("Superaste NIVEL 3");
+		nivel4();
+	}else if (nMalos == 20) {
+		alert("Ganaste");
+		// Pantalla puntos ganador
+	}
+}
 function nivel1(){
 	ocultarCapa("#contenedor");
 	mostrarCapa("#juego1");
-	//iniciarR(50);
+	iniciarR(50);
 	nNivel("NIVEL 1");
 	crearMalos();
 	setInterval(colisionMaloActor,10);
-	//setInterval(rVida,1000);
-	//rVida();
-	//cMalo();
-	// setInterval(mMueMaloD,10);
-	//iniciarR(200);
-	//setInterval(colisionMaloActor,10);
-	// Malos Superados
-	if (nMalos > 2) {
-		alert("Superaste NIVEL 1");
-		nivel2();
-	}
 }
 function nivel2(){
-	nMalos=0;
+	cAtras = 1000;
 	iniciarR(50);
 	nNivel("NIVEL 2");
-	if (nMalos > 4) {
-		alert("Superaste NIVEL 2");
-		nivel3();
-	}
 }
 function nivel3(){
-	nMalos=0;
+	cAtras = 500;
 	iniciarR(200);
 	nNivel("NIVEL 3");
-	if (nMalos > 2) {
-		alert("Superaste NIVEL 3");
-		nivel4();
-	}
 }
 function nivel4(){
-	nMalos=0;
+	cAtras = 500;
 	iniciarR(90);
 	nNivel("NIVEL 4");
-	if (nMalos > 4) {
-		alert("Ganaste");
-	}
 }
 
 // Crear Malos POR INTERVALOS
@@ -359,6 +373,8 @@ function rVida(){
 		case 0:
 			$(".pTotalJ1").html(puntuacionJ1);
 			mostrarCapa("#gmOver");
+			clearInterval(m1);
+			clearInterval(m2);
 			break;
 	}
 
