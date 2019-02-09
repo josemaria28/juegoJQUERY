@@ -98,7 +98,8 @@ function disparo(ultimoMovimiento){
 		case "derecha":// Left
 			// Disparar
 			$("#actor2").append('<img id="balaDer" src="imagenes/balaDer.gif">');
-			m3 = setInterval(movimientoBalaD(),5);
+			setInterval(colisionBalaD,5);
+			m3 = setInterval(movimientoBalaD,5);
 			break;
 		case "izquierda":// Rigth
 			// Disparar
@@ -109,8 +110,7 @@ function disparo(ultimoMovimiento){
 }
 // Balas
 function movimientoBalaD(){
-	$("#balaDer").animate({top: "+=3px"},1);
-	setInterval(colisionBalaD,5);
+	$("#balaDer").animate({left: "+=3px"},1);
 }
 function colisionBalaD(){
 	var bColision = collision($('#balaDer'),$('#sueloH'));
