@@ -4,6 +4,7 @@ var puntuacionJ1 = 0;
 var vidaJ1 = 100;
 // Tiempo
 var cAtras = 1000;
+var m1,m2,m3,m4,m5,m6,m7,m8, m9, m10 = null;
 // Manejador //
 $(document).ready(function(){
 	
@@ -74,11 +75,13 @@ $(document).ready(function(){
 	$(document).keydown(function(tecla){
 		if(tecla.keyCode == 32){
 			// Posicion #actor2
-			var elemento = $("#actor2");
-			var posicion = elemento.position();
-			alert( "left: " + posicion.left + ", top: " + posicion.top );
+			// var elemento = $("#actor2");
+			// var posicion = elemento.position();
+			// alert( "left: " + posicion.left + ", top: " + posicion.top );
 			// ------------------------------------------------------------ //
+			ultimoMovimiento = "derecha";
 			disparo(ultimoMovimiento);
+			
 		}
 	});
 
@@ -94,32 +97,57 @@ function mostrarCapa(capa){
 }
 function disparo(ultimoMovimiento){
 	//alert(ultimoMovimiento)
+	var elemento = $("#actor2");
+	var posicion = elemento.position();
+	// alert( "left: " + posicion.left + ", top: " + posicion.top );
 	switch (ultimoMovimiento) {
 		case "derecha":// Left
 			// Disparar
-			$("#actor2").append('<img id="balaDer" src="imagenes/balaDer.gif">');
-			setInterval(colisionBalaD,5);
+			$("#juego1").append('<img id="balaDer" src="imagenes/balaDer.gif">');
+			$("#balaDer").css({"left": posicion.left, "top": posicion.top-180});
 			m3 = setInterval(movimientoBalaD,5);
+			m4 = setInterval(colisionBalaD,5);
+			m5 = setInterval(colisionBalaMalo,5);
 			break;
 		case "izquierda":// Rigth
 			// Disparar
 			$("#actor1").append('<img id="balaIzq" src="imagenes/balaIzq.gif">');
+			$("#balaDer").css({"left": posicion.left, "top": posicion.top-180});
+			m6 = setInterval(movimientoBalaI,5);
+			m7 = setInterval(colisionBalaI,5);
+			m8 = setInterval(colisionBalaMaloI,5);
 			//movimientoBalaI();
 			break;
 	}
 }
 // Balas
 function movimientoBalaD(){
-	$("#balaDer").animate({left: "+=3px"},1);
+	$("#balaDer").animate({left: "-=3px"},1);
 }
 function colisionBalaD(){
-	var bColision = collision($('#balaDer'),$('#sueloH'));
+	var bColision = collision($('#balaDer'),$('#paredI'));
 
 	if( bColision > 0){
 		$('#balaDer').stop(true);
-		clearInterval(m3);
-		// clearInterval(m4);
 		$('#balaDer').remove();
+		clearInterval(m3);
+		clearInterval(m4);
+	}
+	
+}
+function colisionBalaMalo(){
+	var bColision = collision($('#balaDer'),$('#malo1'));
+
+	if( bColision > 0){
+		$('#malo1').stop(true);
+		$('#balaDer').stop(true);
+		$('#balaDer').remove();
+		$('#malo1').remove();
+		clearInterval(m1);
+		clearInterval(m2);
+		clearInterval(m3);
+		clearInterval(m4);
+		clearInterval(m5);
 	}
 }
 
@@ -259,7 +287,7 @@ function nivel4(){
 }
 
 // Crear Malos POR INTERVALOS
-var m1,m2,m3,m4,m5,m6,m7,m8 = null;
+
 function crearMalos(){
 	$("#juego1").append('<img id="malo1">');
 	m1 = setInterval(moverMaloD,5);
