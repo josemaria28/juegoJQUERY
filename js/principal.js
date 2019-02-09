@@ -86,7 +86,7 @@ function disparo(ultimoMovimiento){
 		case "derecha":// Left
 			// Disparar
 			$("#juego1").append('<img id="balaDer" src="imagenes/balaDer.gif">');
-			$("#balaDer").css({"left": posicion.left, "top": posicion.top-180});
+			$("#balaDer").css({"left": posicion.left-150, "top": posicion.top-290});
 			m3 = setInterval(movimientoBalaD,5);
 			m4 = setInterval(colisionBalaD,5);
 			m5 = setInterval(colisionBalaMalo,5);
@@ -94,7 +94,7 @@ function disparo(ultimoMovimiento){
 		case "izquierda":// Rigth
 			// Disparar
 			$("#juego1").append('<img id="balaIzq" src="imagenes/balaIzq.gif">');
-			$("#balaIzq").css({"left": posicion.left, "top": posicion.top-180});
+			$("#balaIzq").css({"left": posicion.left-80, "top": posicion.top-290});
 			m6 = setInterval(movimientoBalaI,5);
 			m7 = setInterval(colisionBalaI,5);
 			m8 = setInterval(colisionBalaMaloI,5);
@@ -172,7 +172,7 @@ function colisionBalaMalo(){
 // Puntuacion 
 function puntuacion(){
 	puntuacionJ1=puntuacionJ1*nMalos+995;
-	alert(puntuacionJ1)
+	// alert(puntuacionJ1)
 }
 
 //Tiempo RELOJ
