@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Metal_Slug</title>
+	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link rel="icon" type="image/gif" href="imagenes/Fatzombie.gif" />
+	<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="js/principal.js" type="text/javascript"></script>
+</head>
+<body>
+	<!-- Inicio -->
+	<div id="contenedor">
+		<img id="metalSlug" src="imagenes/mstitle.gif">
+		<div id="start">
+			<p class="entrada">Presiona [ ENTER ] para iniciar</p>
+		</div>
+	</div>
+	<!-- Paredes -->
+	<div id="paredI"></div>
+	<div id="paredD"></div>
+	<div id="sueloS"></div>
+	<div id="sueloM"></div>
+	<div id="sueloH"></div>
+	<!-- Mapa -->
+	<div id="juego1">
+		<div id="campos">
+			<!-- Vida -->
+			<div id="campoV">
+				<p class="pVida">Vida</p>
+				<div id="vida">
+					<div class="progress">
+						<div class="progress-bar bg-danger progress-bar-striped"></div>
+					</div>
+				</div>
+			</div>
+			<!-- Tiempo -->
+			<div id="reloj">
+				<p class="pVida cuentaAtras"></p>
+			</div>
+			<!-- Nivel -->
+			<div id="nivel">
+				<p class="pVida nevel"><span class="textNivel"></span></p>
+			</div>
+		</div>
+		
+		<!-- Actor 1 -->
+		<img id="actor1" src="imagenes/animadoZ1.gif">
+
+		<!-- Actor 2 -->
+		<div id="actor2">
+			<img id="actor22" src="imagenes/animadoZ1.gif">
+		</div>
+
+	</div>
+	<!-- GAME OVER -->
+	<div id="gmOver">
+		<img id="gmOver" src="imagenes/overG.jpg">
+		<p class="pVida pPuntuacion">Puntuacion : <span class="pTotalJ1"></span></p>
+	</div>
+
+</body>
+</html>

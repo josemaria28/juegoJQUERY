@@ -1,0 +1,170 @@
+/*Estilos Paginas*/
+*{
+	margin: 0px;
+	padding: 0px;
+}
+body, #contenedor, #juego2{
+	width: 100%;
+	background-color: #180101;
+
+}
+#contenedor, #juego1, #gmOver, .pPuntuacion{
+	position: absolute;
+}
+#gmOver{
+	width: 100%;
+	height: 100vh;
+}
+#juego1{
+	width: 100%;
+	height: 100vh;
+	background-image: url("../imagenes/MetalSlug2-Mission1.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+#metalSlug{
+	width: 40%;
+	display: block;
+	margin:auto;
+	margin-top: 5%;
+}
+#start{
+	text-align: center;
+}
+.entrada{
+	color: cornsilk;
+	padding: 4.5% 0% 2%;
+	font-size: 300%;
+	font-family: 'Bangers', cursive;
+	animation: 0.9s aStart infinite ease alternate-reverse;
+
+}
+#actor1, #malo0, #malo1, #malo2, #malo3, #malo4, #malo5, #malo6, #malo7{
+	width: 7%;
+	display: inline;
+	position: relative;
+}
+#actor1{
+	left: 25%;
+	top: 70%;
+}
+#malo0, #malo1, #malo2, #malo3, #malo4, #malo5, #malo6, #malo7{
+	left: 0;
+	top: 60%;
+	position: relative;
+}
+#paredI, #paredD, #sueloS, #sueloM, #sueloH{
+	width: 3px;
+	height: 100vh;
+	/*background-color: blue;*/
+	position: absolute;
+	/*left: 99%;*/
+	/*top: 0px;*/
+}
+#paredI{
+	left: 3%;
+}
+#paredD{
+	left: 97%;
+}
+#sueloS, #sueloM, #sueloH{
+	width: 100%;
+	height: 3px;
+}
+#sueloS{
+	top: 65%;
+}
+#sueloM{
+	top: 97%;
+}
+#sueloH{
+	top: 20%;
+}
+#campoV,#reloj, #nivel{
+	position: absolute;
+	background-color: #0009;
+	border-radius: 10px;
+	height: 8vh;
+}
+#campoV{
+	width: 35%;
+	top: 2%;
+	left: 9%;
+}
+#vida, .progress{
+	position: absolute;
+	border-radius: 31px;
+}
+.pVida{
+	color: white;
+	font-size: 200%;
+	font-family: 'Bangers', cursive;
+	text-align: center;
+	width: 90%;
+	margin-left: 5%;
+	margin-top: 2%;
+}
+#vida{
+	width: 90%;
+	height: 2vh;
+	background-color: black;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+.progress{
+	width: 100%;
+	height: 2vh;
+	background-color: red;
+}
+#reloj{
+	top: 2%;
+	left: 50%;
+	width: 5%;
+}
+.cuentaAtras{
+	margin-top: 25%; 
+}
+#nivel{
+	top: 2%;
+	left: 60%;
+	width: 20%;
+	/*margin-top: -10%; */
+}
+.nevel{
+	position: absolute;
+	border-radius: 31px;
+	margin-top: 6%;
+}
+#campos{
+	width: 100%;
+	height: 15vh;
+	background-color: #0006;
+	border-radius: 0px 0px 45% 45%;
+}
+.pPuntuacion{
+	top: 80%;
+}
+
+
+
+
+/* Animacion de parpadeo (Inicio Sesion)...*/
+
+@keyframes aStart {
+  from {color: #180101;}
+  to {color: cornsilk;}
+}
+
+
+/* Actor 2*/
+#actor2{
+	display: block;
+	width: 7%;
+	height: 10vh;
+	background-color: yellow;
+
+}
+#actor22{
+	width: 100%;
+	height: 100%;
+}
