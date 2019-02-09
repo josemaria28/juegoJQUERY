@@ -24,48 +24,48 @@ $(document).ready(function(){
 	var ultimoMovimiento = "nada";
 	$(document).keydown(function(tecla){
 		if (tecla.keyCode == 40) {// Down
-			$('#actor1').animate({top: "+=15px"},30);
+			$('#actor2').animate({top: "+=15px"},30);
 			//$('#actor1').attr("src","imagenes/animadoZ1.gif");
-			$('#actor1').width("7%");
-			ultimoMovimiento = "abajo";
+			// $('#actor1').width("7%");
+			// ultimoMovimiento = "abajo";
 		}else if(tecla.keyCode == 38) {// Up
-			$('#actor1').animate({top: "-=15px"},30);
-			//$('#actor1').attr("src","imagenes/animadoZ2.gif");
-			ultimoMovimiento = "arriba";
-			$('#actor1').width("7%");
+			$('#actor2').animate({top: "-=15px"},30);
+			// $('#actor22').attr("src","imagenes/animadoZ2.gif");
+			// ultimoMovimiento = "arriba";
+			// $('#actor1').width("7%");
 		}else if(tecla.keyCode == 37){// Right
-			$('#actor1').animate({left: "+=-15px"},30);
-			$('#actor1').attr("src","imagenes/animadoZ3.gif");
-			$('#actor1').width("7%");
+			$('#actor2').animate({left: "+=-15px"},30);
+			$('#actor22').attr("src","imagenes/animadoZ3.gif");
+			// $('#actor1').width("7%");
 			ultimoMovimiento = "izquerda";
 		}
 		else if(tecla.keyCode == 39){// Left
-			$('#actor1').animate({left: "+=15px"},30);
-			$('#actor1').attr("src","imagenes/animadoZ.gif");
-			$('#actor1').width("7%");
+			$('#actor2').animate({left: "+=15px"},30);
+			$('#actor22').attr("src","imagenes/animadoZ.gif");
+			// $('#actor1').width("7%");
 			ultimoMovimiento = "derecha";
 		}
 	});
 
 	$(document).keyup(function(tecla){
 		if (tecla.keyCode == 40) {// Up
-			$('#actor1').animate({top: "+=15px"},30);
-			$('#actor1').width("7%");
-			ultimoMovimiento = "arriba";
+			$('#actor2').animate({top: "+=15px"},30);
+			// $('#actor1').width("7%");
+			// ultimoMovimiento = "arriba";
 		}else if(tecla.keyCode == 38) {// Down
-			$('#actor1').animate({top: "-=15px"},30);
+			$('#actor2').animate({top: "-=15px"},30);
 			// ultimoMovimiento = "abajo";
-			$('#actor1').width("7%");
+			// $('#actor1').width("7%");
 		}else if(tecla.keyCode == 37){// Left
-			$('#actor1').animate({left: "+=-15px"},30);
-			$('#actor1').attr("src","imagenes/animadoZ1.gif");
-			$('#actor1').width("7%");
+			$('#actor2').animate({left: "+=-15px"},30);
+			$('#actor22').attr("src","imagenes/animadoZ1.gif");
+			// $('#actor1').width("7%");
 			ultimoMovimiento = "derecha";
 		}
 		else if(tecla.keyCode == 39){// Right
-			$('#actor1').animate({left: "+=15px"},30);
-			$('#actor1').attr("src","imagenes/animadoZ2.gif");
-			$('#actor1').width("7%");
+			$('#actor2').animate({left: "+=15px"},30);
+			$('#actor22').attr("src","imagenes/animadoZ2.gif");
+			// $('#actor1').width("7%");
 			ultimoMovimiento = "izquerda";
 		}
 	});
@@ -73,6 +73,11 @@ $(document).ready(function(){
 	// Disparar
 	$(document).keydown(function(tecla){
 		if(tecla.keyCode == 32){
+			// Posicion #actor2
+			var elemento = $("#actor2");
+			var posicion = elemento.position();
+			alert( "left: " + posicion.left + ", top: " + posicion.top );
+			// ------------------------------------------------------------ //
 			disparo(ultimoMovimiento);
 		}
 	});
@@ -90,20 +95,10 @@ function mostrarCapa(capa){
 function disparo(ultimoMovimiento){
 	//alert(ultimoMovimiento)
 	switch (ultimoMovimiento) {
-		case "arriba":// Up
-			// Disparar
-			$("#actor1").append('<img id="balaArriba" src="../imagenes/balaArriba.gif">');
-			//m3 = setInterval(movimientoBalaA,5);
-			//m4 = setInterval(detectarColisionBalaA,5);
-			break;
-		case "abajo":// Down
-			// Disparar
-			$("#malo2").append('<img id="balaAbajo" src="imagenes/balaArriba.gif">');
-			break;
 		case "derecha":// Left
 			// Disparar
-			$("#actor1").append('<img id="balaDer" src="imagenes/balaDer.gif">');
-			//movimientoBalaD();
+			$("#actor2").append('<img id="balaDer" src="imagenes/balaDer.gif">');
+			m3 = setInterval(movimientoBalaD(),5);
 			break;
 		case "izquierda":// Rigth
 			// Disparar
@@ -113,17 +108,18 @@ function disparo(ultimoMovimiento){
 	}
 }
 // Balas
-function movimientoBalaA(){
-	$("#balaA").animate({top: "+=3px"},1);
+function movimientoBalaD(){
+	$("#balaDer").animate({top: "+=3px"},1);
+	setInterval(colisionBalaD,5);
 }
-function detectarColisionBalaA(){
-	var bColision = collision($('#balaA'),$('#sueloH'));
+function colisionBalaD(){
+	var bColision = collision($('#balaDer'),$('#sueloH'));
 
 	if( bColision > 0){
-		$('#balaA').stop(true);
+		$('#balaDer').stop(true);
 		clearInterval(m3);
-		clearInterval(m4);
-		$('#balaA').remove();
+		// clearInterval(m4);
+		$('#balaDer').remove();
 	}
 }
 
@@ -155,35 +151,35 @@ setInterval(detectarColisionB,5);
 //setInterval(detectarColisionMaloI,5);
 
 function detectarColisionD(){
-	var bColision = collision($('#actor1'),$('#paredD'));
+	var bColision = collision($('#actor2'),$('#paredD'));
 
 	if( bColision > 0){
-		$("#actor1").stop(false,false);   
-		$('#actor1').animate({left: "+=-3px"},1);   
+		$("#actor2").stop(false,false);   
+		$('#actor2').animate({left: "+=-3px"},1);   
 	}
 }
 function detectarColisionI(){
-	var bColision = collision($('#actor1'),$('#paredI'));
+	var bColision = collision($('#actor2'),$('#paredI'));
 
 	if( bColision > 0){
-		$("#actor1").stop(false,false);   
-		$('#actor1').animate({left: "+=3px"},1);   
+		$("#actor2").stop(false,false);   
+		$('#actor2').animate({left: "+=3px"},1);   
 	}
 }
 function detectarColisionA(){
-	var bColision = collision($('#actor1'),$('#sueloS'));
+	var bColision = collision($('#actor2'),$('#sueloS'));
 
 	if( bColision > 0){
-		$("#actor1").stop(false,false);   
-		$('#actor1').animate({top: "+=3px"},1);   
+		$("#actor2").stop(false,false);   
+		$('#actor2').animate({top: "+=3px"},1);   
 	}
 }
 function detectarColisionB(){
-	var bColision = collision($('#actor1'),$('#sueloM'));
+	var bColision = collision($('#actor2'),$('#sueloM'));
 
 	if( bColision > 0){
-		$("#actor1").stop(false,false);   
-		$('#actor1').animate({top: "+=-3px"},1);   
+		$("#actor2").stop(false,false);   
+		$('#actor2').animate({top: "+=-3px"},1);   
 	}
 }
 
@@ -308,13 +304,13 @@ function detectarColisionMaloI(){
 
 // Colision Personaje
 function colisionMaloActor(){
-	var bColision = collision($('#malo1'),$('#actor1'));
+	var bColision = collision($('#malo1'),$('#actor2'));
 
 	if( bColision > 0){
 		$('#malo1').stop(true);
 		--nVidas;
 		rVida();
-		$("#actor1").css("left", "80%");
+		$("#actor2").css("left", "80%");
 		clearInterval(m1);
 		clearInterval(m2);
 		m1 = setInterval(mMueMaloI,5);

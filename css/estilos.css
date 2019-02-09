@@ -39,12 +39,17 @@ body, #contenedor, #juego2{
 	animation: 0.9s aStart infinite ease alternate-reverse;
 
 }
-#actor1, #malo0, #malo1, #malo2, #malo3, #malo4, #malo5, #malo6, #malo7{
-	width: 7%;
+#actor1, #actor2, #balaDer, #malo0, #malo1, #malo2, #malo3, #malo4, #malo5, #malo6, #malo7{
 	display: inline;
 	position: relative;
 }
-#actor1{
+#actor1, #malo0, #malo1, #malo2, #malo3, #malo4, #malo5, #malo6, #malo7{
+	width: 7%;
+}
+#balaDer{
+	width: 30%;
+}
+#actor1, #actor2{
 	left: 25%;
 	top: 70%;
 }
@@ -145,9 +150,6 @@ body, #contenedor, #juego2{
 	top: 80%;
 }
 
-
-
-
 /* Animacion de parpadeo (Inicio Sesion)...*/
 
 @keyframes aStart {
@@ -161,7 +163,7 @@ body, #contenedor, #juego2{
 	display: block;
 	width: 7%;
 	height: 10vh;
-	background-color: yellow;
+	/*background-color: yellow;*/
 
 }
 #actor22{
