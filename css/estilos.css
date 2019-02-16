@@ -170,3 +170,40 @@ body, #contenedor, #juego2{
 	width: 100%;
 	height: 100%;
 }
+
+
+table {
+	font-size: 1em;
+}
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+#ui-id-1,#ui-id-3,#ui-id-5,#ui-id-7,#ui-id-9,#ui-id-11{
+	border: 0px;
+	color: black;
+	background-color: #e9e9e9;
+}
+#opener{
+	width: 40%;
+	background: #938264;
+	border: 0px;
+	padding: 9px;
+	border-radius: 15px;
+	font-size: 100%;
+	color: black;
+	font-family: 'Bangers', cursive;
+}
+#draggable{
+	width: 100px;
+background-color: sandybrown;
+border-radius: 50%;
+border: 0px;
+}
+
+#ganA{
+	position: absolute;
+	top: 85%;
+	width: 8%;
+	left: 28%;
+}

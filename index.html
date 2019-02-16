@@ -4,11 +4,13 @@
 	<meta charset="utf-8">
 	<title>Metal_Slug</title>
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
 	<link rel="icon" type="image/gif" href="imagenes/Fatzombie.gif" />
 	<link href="https://fonts.googleapis.com/css?family=Bangers" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="js/principal.js" type="text/javascript"></script>
 </head>
 <body>
@@ -17,6 +19,58 @@
 		<img id="metalSlug" src="imagenes/mstitle.gif">
 		<div id="start">
 			<p class="entrada">Presiona [ ENTER ] para iniciar</p>
+			<button id="opener">Informacion</button>
+		</div>
+		
+
+
+		<!-- INSTRUCCIONES -->
+		<div id="dialog" title="Informacion Juego">
+
+
+			<div id="accordion">
+				<h3>Jugar</h3>
+				<div>
+					<p>Para poder jugar es necesario saber que para iniciar el juego le daremos solo una vez al boton ENTER, despues nos podremos mover con las flechas de direcciones del teclado y para disparar tendremos la tecla de espacio.<br><br>
+						<mark>Inf.:Muy importante no pulsar mas de una vez para disparar si vas en la misma direccion.</mark> </p>
+					</div>
+					<h3>Nivel 1</h3>
+					<div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua.proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					</div>
+					<h3>Nivel 2</h3>
+					<div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					</div>
+					<h3>Nivel 3</h3>
+					<div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. </p>
+						<ul>
+							<li>sunt in culpa qui 1</li>
+							<li>sunt in culpa qui 2</li>
+							<li>sunt in culpa qui 3</li>
+						</ul>
+					</div>
+					<h3>Nivel 4</h3>
+					<div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					</p>
+				</div>
+				<h3>Requisitos</h3>
+				<div>
+					<p>
+						Matar a todos los malos en el menor tiempo posible.
+					</p>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- Paredes -->
@@ -24,7 +78,6 @@
 	<div id="paredD"></div>
 	<div id="sueloS"></div>
 	<div id="sueloM"></div>
-	<!-- <div id="sueloH"></div> -->
 	<!-- Mapa -->
 	<div id="juego1">
 		<div id="campos">
@@ -56,11 +109,23 @@
 		</div>
 
 	</div>
+
+	<!-- Ganador -->
+	<div id="ganador">
+		<img id="metalSlug" src="imagenes/logo-mslug1.gif">
+		<img id="ganA" src="imagenes/ezgif2-reverse.gif">
+		<p class="pVida pPuntuacion entrada">Puntuacion : <span class="pTotalJ1"></span></p>
+	</div>
+
 	<!-- GAME OVER -->
 	<div id="gmOver">
 		<img id="gmOver" src="imagenes/overG.jpg">
 		<p class="pVida pPuntuacion">Puntuacion : <span class="pTotalJ1"></span></p>
 	</div>
+	
+	
+
+
 
 </body>
 </html>

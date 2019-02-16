@@ -10,15 +10,30 @@ var nMalos=0;
 var m1,m2,m3,m4,m5,m6,m7,m8, m9, m10 = null;
 // Manejador //
 $(document).ready(function(){
-	
-	//ocultarCapa("#contenedor");
+	$(function(){
+				$("#accordion").accordion();
+			});
+			  $( function() {
+    $( "#dialog" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 1000
+      },
+      hide: {
+        effect: "blind",
+        duration: 1000
+      }
+    });
+ 
+    $( "#opener" ).on( "click", function() {
+      $( "#dialog" ).dialog( "open" );
+    });
+  } );
 	ocultarCapa("#juego1");
 	ocultarCapa("#gmOver");
-
-	// Ocultar Inicio Juego
-	$(document).click(function(){
-		nivel1();
-	});
+	ocultarCapa("#ganador");
+	
 	$(document).keydown(function(tecla){
 		if (tecla.keyCode == 13){
 			nivel1();
@@ -40,6 +55,10 @@ $(document).ready(function(){
 			$('#actor2').animate({left: "+=15px"},30);
 			$('#actor22').attr("src","imagenes/animadoZ.gif");
 			ultimoMovimiento = "derecha";
+		}else if (tecla.keyCode == 73) {// Informacion
+			$(function(){
+				$("#accordion").accordion();
+			});
 		}
 	});
 
@@ -86,7 +105,7 @@ function disparo(ultimoMovimiento){
 		case "derecha":// Left
 			// Disparar
 			$("#juego1").append('<img id="balaDer" src="imagenes/balaDer.gif">');
-			$("#balaDer").css({"left": posicion.left-150, "top": posicion.top-290});
+			$("#balaDer").css({"left": posicion.left-150, "top": posicion.top-220});
 			m3 = setInterval(movimientoBalaD,5);
 			m4 = setInterval(colisionBalaD,5);
 			m5 = setInterval(colisionBalaMalo,5);
@@ -94,7 +113,7 @@ function disparo(ultimoMovimiento){
 		case "izquierda":// Rigth
 			// Disparar
 			$("#juego1").append('<img id="balaIzq" src="imagenes/balaIzq.gif">');
-			$("#balaIzq").css({"left": posicion.left-80, "top": posicion.top-290});
+			$("#balaIzq").css({"left": posicion.left-80, "top": posicion.top-220});
 			m6 = setInterval(movimientoBalaI,5);
 			m7 = setInterval(colisionBalaI,5);
 			m8 = setInterval(colisionBalaMaloI,5);
@@ -103,10 +122,10 @@ function disparo(ultimoMovimiento){
 }
 // Balas
 function movimientoBalaD(){
-	$("#balaDer").animate({left: "-=3px"},1);
+	$("#balaDer").animate({left: "-=6px"},1);
 }
 function movimientoBalaI(){
-	$("#balaIzq").animate({left: "+=3px"},1);
+	$("#balaIzq").animate({left: "+=6px"},1);
 }
 function colisionBalaI(){
 	var bColision = collision($('#balaIzq'),$('#paredD'));
@@ -171,14 +190,14 @@ function colisionBalaMalo(){
 }
 // Puntuacion 
 function puntuacion(){
-	puntuacionJ1=puntuacionJ1*nMalos+995;
+	puntuacionJ1+=500;
 	// alert(puntuacionJ1)
 }
 
 //Tiempo RELOJ
 function iniciarR (tiempo) {
 	// Tiempo
-	setInterval(cuentAtras,tiempo);
+	m10 = setInterval(cuentAtras,tiempo);
 	$(".cuentaAtras").html(cAtras);
 }
 function cuentAtras(){
@@ -187,8 +206,9 @@ function cuentAtras(){
 	}else {
 		ocultarCapa("#juego1");
 		ocultarCapa("#contenedor");
+		//ocultarCapa("#contenedor");
 		mostrarCapa("#gmOver");
-		$(".pTotalJ1").html(puntuacionJ1);
+		reiniciarNivelL();
 	}
 	$(".cuentaAtras").html(cAtras);
 }
@@ -272,8 +292,8 @@ function pasarNivel(){
 		alert("Superaste NIVEL 3");
 		nivel4();
 	}else if (nMalos == 20) {
-		alert("Ganaste");
-		// Pantalla puntos ganador
+		alert("Ganaste\nPuntos : "+puntuacionJ1);
+		location.reload();
 	}
 }
 function nivel1(){
@@ -283,6 +303,9 @@ function nivel1(){
 	nNivel("NIVEL 1");
 	crearMalos();
 	setInterval(colisionMaloActor,10);
+	$( function() {
+	$( "#actor2" ).draggable();
+});
 }
 function nivel2(){
 	cAtras = 1000;
@@ -307,8 +330,6 @@ function crearMalos(){
 	m1 = setInterval(moverMaloD,5);
 	m2 = setInterval(detectarColisionMaloD,5);
 }
-
-// Randon IMG MALOS
 
 // Movimiento Malo
 function moverMaloD(){
@@ -373,9 +394,16 @@ function rVida(){
 		case 0:
 			$(".pTotalJ1").html(puntuacionJ1);
 			mostrarCapa("#gmOver");
+			$('#malo1').stop(true);
 			clearInterval(m1);
 			clearInterval(m2);
+			reiniciarNivelL();
 			break;
 	}
 
+}
+
+function reiniciarNivelL(){
+	$(".pTotalJ1").html(puntuacionJ1);
+	  
 }
